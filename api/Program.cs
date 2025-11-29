@@ -13,13 +13,6 @@ builder.Services.AddSwaggerGen(opt =>
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ContactStorage>();
 
-builder.Services.AddCors(opt =>
-opt.AddPolicy("CorsPolicy", policy =>
-{
-    policy.AllowAnyMethod()
-    .AllowAnyHeader()
-    .WithOrigins(args[0]);
-}));
 
 var app = builder.Build();
 app.UseSwagger();
