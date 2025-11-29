@@ -1,22 +1,26 @@
-import "./App.css";
+п»їimport "./App.css";
 
-function App() {
+const App = () =>{
     return (
-        <div>
-            <div>
-                <div>
-                    <h1>Список контактов</h1>
+        <div className = "container mt-5">
+            <div className = "card">
+                <div className = "card-header">
+                    <h1>РЎРїРёСЃРѕРє РєРѕРЅС‚Р°РєС‚РѕРІ</h1>
                 </div>
-                <div>
-                    <table>
+                <div className = "card-body">
+                    <table className = "table table-hover">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Имя контакта</th>
+                                <th>РРјСЏ РєРѕРЅС‚Р°РєС‚Р°</th>
                                 <th>Email</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            <th>1</th>
+                            <th>РРјСЏ С„Р°РјРёР»РёСЏ 1</th>
+                            <th>example@mail.ru</th>
+                        </tbody>
                     </table>
                 </div>
             </div>
