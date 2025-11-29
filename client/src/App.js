@@ -1,13 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-
-
-    </div>
-  );
+    return (
+        <div>
+            <div>
+                <div>
+                    <h1>Список контактов</h1>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Имя контакта</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
