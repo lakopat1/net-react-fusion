@@ -3,6 +3,7 @@
     { id: 2, name: "Пётр Петров", email: "petr.petrov@example.com" },
     { id: 3, name: "Анна Смирнова", email: "anna.smirnova@example.com" },
     { id: 4, name: "Сергей Кузнецов", email: "sergey.kuznetsov@example.com" },
+    { id: 5, name: "Вадим Старавойтов", email: "vadim.staravoetov@example.com" },
 ];
 
 export default contacts;
