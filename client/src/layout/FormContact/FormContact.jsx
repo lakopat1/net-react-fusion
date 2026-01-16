@@ -8,6 +8,47 @@ const FormContact = ({ contacts, nextId, onAddContact }) => {
     const [birthDate, setBirthDate] = useState("");
     const [error, setError] = useState("");
 
+    const normalizePhone = (value) => value.replace(/[^\d+]/g, "");
+
+    const validate = () => {
+        const trimmedName = name.trim();
+        const trimmedJobTitle = jobTitle.trim();
+        const normalizedPhone = normalizePhone(mobilePhone.trim());
+
+        if (!trimmedName) return "Введите имя контакта";
+        if (trimmedName.length < 2) return "Имя слишком короткое (минимум 2 символа)";
+
+        if (!normalizedPhone) return "Введите мобильный телефон";
+        if (!/^\+?\d{10,15}$/.test(normalizedPhone))
+            return "Телефон должен содержать 10–15 цифр (можно начать с +)";
+
+        if (!trimmedJobTitle) return "Введите должность";
+        if (trimmedJobTitle.length < 2)
+            return "Должность слишком короткая (минимум 2 символа)";
+
+        if (!birthDate) return "Выберите дату рождения";
+
+        const selected = new Date(birthDate);
+        if (Number.isNaN(selected.getTime()))
+            return "Дата рождения выглядит неверно";
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        selected.setHours(0, 0, 0, 0);
+
+        if (selected > today)
+            return "Дата рождения не может быть в будущем";
+
+        const phoneExists = contacts.some(
+            (c) =>
+                normalizePhone(String(c.mobilePhone || "")) === normalizedPhone
+        );
+
+        if (phoneExists)
+            return "Контакт с таким телефоном уже существует";
+
+        return "";
+    };
 
     return (
         <div className="container mt-5">
@@ -17,7 +58,7 @@ const FormContact = ({ contacts, nextId, onAddContact }) => {
                 </div>
 
                 <div className="card-body">
-                    <form onSubmit={error} className="mb-3">
+                    <form onSubmit={handleSubmit} className="mb-3">
                         <div className="row g-2">
                             <div className="col-md-3">
                                 <input
@@ -74,5 +115,6 @@ const FormContact = ({ contacts, nextId, onAddContact }) => {
             </div>
         </div>
     );
-}
+};
+
 export default FormContact;
