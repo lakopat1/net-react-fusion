@@ -48,6 +48,29 @@ const FormContact = ({ contacts, nextId, onAddContact }) => {
             return "Контакт с таким телефоном уже существует";
 
         return "";
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            setError("");
+
+            const validationError = validate();
+            if (validationError) {
+                setError(validationError);
+                return;
+            }
+
+            onAddContact({
+                id: nextId,
+                name: name.trim(),
+                mobilePhone: normalizePhone(mobilePhone.trim()),
+                jobTitle: jobTitle.trim(),
+                birthDate,
+            });
+
+            setName("");
+            setMobilePhone("");
+            setJobTitle("");
+            setBirthDate("");
     };
 
     return (
