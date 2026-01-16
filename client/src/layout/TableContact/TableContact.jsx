@@ -1,5 +1,12 @@
 ﻿import React from "react";
 
+const formatBirthDate = (value) => {
+    if (!value) return "";
+    const d = value instanceof Date ? value : new Date(value);
+    if (Number.isNaN(d.getTime())) return String(value);
+    return d.toLocaleDateString("ru-RU");
+};
+
 const TableContact = ({ contacts }) => {
   return (
     <table className="table table-hover table-bordered mb-0">
@@ -20,7 +27,7 @@ const TableContact = ({ contacts }) => {
             <td>{contact.name}</td>
             <td>{contact.mobilePhone}</td>
             <td>{contact.jobTitle}</td>
-            <td>{(contact.birthDate)}</td>
+            <td>{formatBirthDate(contact.birthDate)}</td>
           </tr>
         ))}
       </tbody>
