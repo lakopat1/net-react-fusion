@@ -28,7 +28,7 @@ const TableContact = ({ contacts, onDeleteContact }) => {
                         key={contact.id}
                         onMouseEnter={() => setHoveredId(contact.id)}
                         onMouseLeave={() => setHoveredId(null)}
-                        style={{ position: "relative" }}   // 👈 важно
+                        style={{ position: "relative" }} 
                     >
                         <td>{index + 1}</td>
                         <td>{contact.name}</td>

@@ -1,9 +1,12 @@
-﻿import "./App.css";
+﻿import axios from "axios";
+import "./App.css";
 import { useMemo, useState } from "react";
 import initialContacts from "./contact/contacts";
 import FormContact from "./layout/FormContact/FormContact";
 
 const App = () => {
+    const url = "http://localhost:5000/api/ContactManagement/contacts";
+    axios.get(url).then(res => console.log(res.data));
     const [contacts, setContacts] = useState(initialContacts);
 
     const nextId = useMemo(() => {
