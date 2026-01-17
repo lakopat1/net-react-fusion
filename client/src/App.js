@@ -15,11 +15,17 @@ const App = () => {
         setContacts((prev) => [newContact, ...prev]);
     };
 
+    const handleDeleteContact = (id) => {
+        setContacts((prev) => prev.filter((c) => c.id !== id));
+    };
+
+
     return (
         <FormContact
             contacts={contacts}
             nextId={nextId}
             onAddContact={handleAddContact}
+            onDeleteContact={handleDeleteContact}
         />
     );
 };

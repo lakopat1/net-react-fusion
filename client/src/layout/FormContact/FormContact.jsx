@@ -1,12 +1,14 @@
 ﻿import React, { useState } from "react";
 import TableContact from "../TableContact/TableContact";
 
-const FormContact = ({ contacts, nextId, onAddContact }) => {
+const FormContact = ({ contacts, nextId, onAddContact, onDeleteContact }) => {
     const [name, setName] = useState("");
     const [mobilePhone, setMobilePhone] = useState("");
     const [jobTitle, setJobTitle] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [error, setError] = useState("");
+
+
 
     const normalizePhone = (value) => value.replace(/[^\d+]/g, "");
 
@@ -134,7 +136,8 @@ const FormContact = ({ contacts, nextId, onAddContact }) => {
                         )}
                     </form>
 
-                    <TableContact contacts={contacts} />
+                    <TableContact contacts={contacts} onDeleteContact={onDeleteContact} />
+                    
                 </div>
             </div>
         </div>
