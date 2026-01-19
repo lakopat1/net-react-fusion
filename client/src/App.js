@@ -27,7 +27,14 @@ const App = () => {
     }, [contacts]);
 
     const handleAddContact = (newContact) => {
-        setContacts((prev) => [newContact, ...prev]);
+        axios
+            .post(`${baseApiUrl}/ContactManagement/contacts`, newContact)
+            .then(res => {
+                setContacts(prev => [res.data, ...prev]);
+            })
+            .catch(err => {
+                console.error("POST error:", err);
+            });
     };
 
     const handleDeleteContact = (id) => {
