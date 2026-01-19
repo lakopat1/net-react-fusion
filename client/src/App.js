@@ -4,9 +4,12 @@ import { useMemo, useState } from "react";
 import initialContacts from "./contact/contacts";
 import FormContact from "./layout/FormContact/FormContact";
 
+const baseApiUrl = process.env.REACT_APP_API_URL;
 const App = () => {
-    const url = "http://localhost:5000/api/ContactManagement/contacts";
+    const url = `${baseApiUrl}/api/contacts`; 
+
     axios.get(url).then(res => console.log(res.data));
+
     const [contacts, setContacts] = useState(initialContacts);
 
     const nextId = useMemo(() => {
@@ -33,4 +36,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default App;n
