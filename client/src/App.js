@@ -37,8 +37,14 @@ const App = () => {
             });
     };
 
-    const handleDeleteContact = (id) => {
-        setContacts((prev) => prev.filter((c) => c.id !== id));
+    const handleDeleteContact = async (id) => {
+        try {
+            await axios.delete(`${url}/${id}`);
+            setContacts((prev) => prev.filter((c) => c.id !== id));
+        } catch (err) {
+            console.error("DELETE error:", err?.response?.status, err?.response?.data || err.message);
+            alert(err?.response?.data || "Ошибка при удалении контакта");
+        }
     };
 
     return (
