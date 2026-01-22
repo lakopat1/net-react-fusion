@@ -76,6 +76,26 @@ public class SQLiteStorage : IStorage
 
     public bool UpdateContact(ContactDto contactDto, int id)
     {
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
 
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        UPDATE Contacts
+        SET Name = @name,
+            MobilePhone = @mobilePhone,
+            JobTitle = @jobTitle,
+            BirthDate = @birthDate
+        WHERE Id = @id;
+        ";
+
+        command.Parameters.AddWithValue("@name", contactDto.Name);
+        command.Parameters.AddWithValue("@mobilePhone", contactDto.MobilePhone);
+        command.Parameters.AddWithValue("@jobTitle", contactDto.JobTitle);
+        command.Parameters.AddWithValue("@birthDate", contactDto.BirthDate!.Value.ToString("yyyy-MM-dd"));
+        command.Parameters.AddWithValue("@id", id);
+
+        return command.ExecuteNonQuery() > 0;
     }
+
 }
