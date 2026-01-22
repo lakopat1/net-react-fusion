@@ -63,8 +63,16 @@ public class SQLiteStorage : IStorage
 
     public bool Remove(int id)
     {
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
 
+        using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM Contacts WHERE Id = @id;";
+        command.Parameters.AddWithValue("@id", id);
+
+        return command.ExecuteNonQuery() > 0;
     }
+
 
     public bool UpdateContact(ContactDto contactDto, int id)
     {
