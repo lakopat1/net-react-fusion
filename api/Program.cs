@@ -11,7 +11,14 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IStorage,InMemoryContact>();
+builder.Services.AddSingleton<IStorage>(sp =>
+{
+    var connectionString =
+        builder.Configuration.GetConnectionString("SqliteStringConnection");
+
+    return new SqliteStorage(connectionString);
+});
+
 
 builder.Services.AddCors(options =>
 {
