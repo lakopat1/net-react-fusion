@@ -1,11 +1,19 @@
 using System;
 using System.Collections.Generic;
 
-public class ContactStorage
+public interface IStorage
+{
+    List<Contact> GetContacts();
+    bool Add(Contact contact);
+    bool Remove(int id);
+    bool UpdateContact(ContactDto contactDto, int id);
+}
+
+public class InMemoryContact : IStorage
 {
     private List<Contact> Contacts { get; set; }
 
-    public ContactStorage()
+    public InMemoryContact()
     {
         Contacts = new List<Contact>
         {

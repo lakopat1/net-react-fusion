@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen(opt =>
     });
 });
 builder.Services.AddControllers();
-builder.Services.AddSingleton<ContactStorage>();
+builder.Services.AddSingleton<IStorage,InMemoryContact>();
 
 builder.Services.AddCors(options =>
 {
