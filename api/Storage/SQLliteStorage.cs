@@ -43,8 +43,23 @@ public class SQLiteStorage : IStorage
 
     public bool Add(Contact contact)
     {
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
 
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+        INSERT INTO Contacts (Name, MobilePhone, JobTitle, BirthDate)
+        VALUES (@name, @mobilePhone, @jobTitle, @birthDate);
+        ";
+
+        command.Parameters.AddWithValue("@name", contact.Name);
+        command.Parameters.AddWithValue("@mobilePhone", contact.MobilePhone);
+        command.Parameters.AddWithValue("@jobTitle", contact.JobTitle);
+        command.Parameters.AddWithValue("@birthDate", contact.BirthDate.ToString("yyyy-MM-dd"));
+
+        return command.ExecuteNonQuery() > 0;
     }
+
 
     public bool Remove(int id)
     {
