@@ -1,40 +1,11 @@
-using Microsoft.OpenApi.Models;
+using api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplicationServices();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(opt =>
-{
-    opt.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "API списка контактов",
-    });
-});
-builder.Services.AddControllers();
-builder.Services.AddSingleton<IStorage>(sp =>
-{
-    var connectionString =
-        builder.Configuration.GetConnectionString("SqliteStringConnection");
-
-    return new SqliteStorage(connectionString);
-});
-
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("CorsPolicy",
-        builder => builder
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
-});
+builder.Services.AddApiServices(builder.Configuration);
 
 var app = builder.Build();
-app.UseSwagger();
-app.UseSwaggerUI();
 
-app.MapControllers();
-app.UseCors("CorsPolicy");
+app.UseApiPipeline();
+
 app.Run();
