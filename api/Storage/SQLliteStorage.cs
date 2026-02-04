@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
-public interface IStorage
-{
-    List<Contact> GetContacts();
-    bool Add(Contact contact);
-    bool Remove(int id);
-    bool UpdateContact(ContactDto contactDto, int id);
-}
-
+namespace api.Storage;
 public class SQLiteStorage : IStorage
 {
     private readonly string connectionString = "Data Source=contacts.db";

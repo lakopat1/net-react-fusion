@@ -1,13 +1,6 @@
 using System;
 using System.Collections.Generic;
-
-public interface IStorage
-{
-    List<Contact> GetContacts();
-    bool Add(Contact contact);
-    bool Remove(int id);
-    bool UpdateContact(ContactDto contactDto, int id);
-}
+namespace api.Storage;
 
 public class InMemoryContact : IStorage
 {
