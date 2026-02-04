@@ -1,5 +1,4 @@
 ﻿namespace api.Storage;
-
 public interface IStorage
 {
     List<Contact> GetContacts();
