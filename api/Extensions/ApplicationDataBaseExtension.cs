@@ -1,6 +1,6 @@
 namespace api.Extensions;
 
-public static class ApplicationDataBaseExtension
+public static class ApplicationDataBaseExtension : 
 {
     public static IServiceProvider InitializeDatabase(this IServiceProvider services,IConfiguration configuration)
     {

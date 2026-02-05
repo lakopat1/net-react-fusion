@@ -1,3 +1,4 @@
+namespace api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

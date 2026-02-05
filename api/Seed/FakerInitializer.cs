@@ -1,6 +1,8 @@
 using System;
 using Bogus;
 using Microsoft.Data.Sqlite;
+using System.Collections.Generic;
+namespace api.Storage;
 
 namespace api.Seed;
 
