@@ -1,18 +1,11 @@
 using System;
 using Bogus;
 using Microsoft.Data.Sqlite;
-using System.Collections.Generic;
-namespace api.Storage;
 
-namespace api.Seed;
-
-public interface IInitializer
+namespace api.Seed
 {
-    void Initialize();
-}
-
-public class FakerInitializer : IInitializer
-{
+    public class FakerInitializer : IInitializer
+    {
     private readonly string connectionString;
 
     public FakerInitializer(string connectionString)
@@ -66,5 +59,6 @@ public class FakerInitializer : IInitializer
             command.ExecuteNonQuery();
         }
     }
-}
 
+    }
+}

@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using api.Storage;
 
 public class ContactManagementController : BaseController
 {
-    private readonly InMemoryContact storage;
+    private readonly IStorage storage;
 
-    public ContactManagementController(InMemoryContact storage)
+    public ContactManagementController(IStorage storage)
     {
         this.storage = storage;
     }
