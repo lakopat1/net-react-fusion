@@ -1,4 +1,3 @@
-namespace api.Extensions;
 
 public static class ApplicationBuilderExtension
 {

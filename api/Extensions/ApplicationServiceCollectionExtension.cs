@@ -1,5 +1,7 @@
-using api.Storage;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using api.Storage;
 
 namespace api.Extensions;
 
@@ -22,7 +24,7 @@ public static class ApplicationServiceCollectionExtension
         services.AddSingleton<IStorage>(sp =>
         {
             var cs = config.GetConnectionString("SqliteStringConnection");
-            return new SqliteStorage(cs);
+            return new SQLiteStorage();
         });
 
         services.AddCors(options =>

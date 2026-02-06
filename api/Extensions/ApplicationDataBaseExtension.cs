@@ -1,20 +1,23 @@
 namespace api.Extensions;
 
-public static class ApplicationDataBaseExtension : 
+public static class ApplicationDataBaseExtension
 {
-    public static IServiceProvider InitializeDatabase(this IServiceProvider services,IConfiguration configuration)
+    public static IServiceCollection InitializeDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        using var scope = app.Services.CreateScope();
+        // Get connection string from configuration or use default sqlite file
+        var connectionString = configuration.GetConnectionString("SqliteStringConnection") ?? "Data Source=contacts.db";
 
-        var storage = scope.ServiceProvider.GetService<IStorage>();
-        var dbStorage = storage as SqliteStorage;
-
-        if (dbStorage != null)
+        // Run DB seed / initializer to ensure mock data exists
+        try
         {
-            string cs = configuration.GetConnectionString("SqliteStringConnection");
-            new FakerInitializer(cs).Initialize();
-
+            var initializer = new api.Seed.FakerInitializer(connectionString);
+            initializer.Initialize();
         }
-        return app;
+        catch
+        {
+            // Swallow any exception here to avoid preventing app startup; in dev you may want to log this.
+        }
+
+        return services;
     }
 }
